@@ -9,7 +9,8 @@ app.use(express.json());
 app.use(cors());
 
 
-function validate(request, response, next){
+function validatePost(request, response, next){
+
 	const {title, url, techs} = request.body;
 	
 	if(!title || !url || !techs){
@@ -26,7 +27,7 @@ app.get("/repositories", (request, response) => {
 	response.json(repositories)
 });
 
-app.post("/repositories", validate, (request, response) => {
+app.post("/repositories", validatePost, (request, response) => {
 	const {title, url, techs} = request.body;
 
 	const repository = { id : uuid(), title, url, techs, likes : 0};
